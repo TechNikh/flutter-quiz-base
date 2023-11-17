@@ -9,7 +9,9 @@ import 'package:quiz_app/widgets/my_scaffold.dart';
 import 'package:quiz_app/widgets/question_ui.dart';
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key, bool showSolutions = false});
+  const QuizPage({required this.isFlashcardMode, super.key, bool showSolutions = false});
+
+  final bool isFlashcardMode;
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -73,25 +75,26 @@ class _QuizPageState extends State<QuizPage> {
                             color: Colors.white,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (quizSession.selectedAnswers.every((element) => element.isNotEmpty)) {
-                              Get.off(() => ScorePage(quizSession: quizSession));
-                            } else {
-                              Get.defaultDialog(
-                                  content:
-                                      const Text('You have not answered all questions.\nDo you want to end the test?'),
-                                  actions: [
-                                    TextButton(onPressed: () => Get.back(), child: const Text('No')),
-                                    ElevatedButton(
-                                      onPressed: () => Get.off(() => ScorePage(quizSession: quizSession)),
-                                      child: const Text('Yes'),
-                                    ),
-                                  ]);
-                            }
-                          },
-                          child: const Text('SUBMIT'),
-                        ),
+                        if(!widget.isFlashcardMode)
+                          ElevatedButton(
+                            onPressed: () {
+                              if (quizSession.selectedAnswers.every((element) => element.isNotEmpty)) {
+                                Get.off(() => ScorePage(quizSession: quizSession));
+                              } else {
+                                Get.defaultDialog(
+                                    content:
+                                    const Text('You have not answered all questions.\nDo you want to end the test?'),
+                                    actions: [
+                                      TextButton(onPressed: () => Get.back(), child: const Text('No')),
+                                      ElevatedButton(
+                                        onPressed: () => Get.off(() => ScorePage(quizSession: quizSession)),
+                                        child: const Text('Yes'),
+                                      ),
+                                    ]);
+                              }
+                            },
+                            child: const Text('SUBMIT'),
+                          ),
                       ],
                     ),
                   ),
@@ -117,7 +120,7 @@ class _QuizPageState extends State<QuizPage> {
                                   borderRadius: BorderRadius.circular(borderRadius),
                                   boxShadow: const [BoxShadow(offset: Offset(0, 2), blurRadius: 5)],
                                 ),
-                                child: QuestionUI(quizSession: quizSession, index: index, pageC: pageC),
+                                child: QuestionUI(quizSession: quizSession, index: index, pageC: pageC, isFlashcardMode: widget.isFlashcardMode,),
                               ),
                             ],
                           ),

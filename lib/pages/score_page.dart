@@ -61,7 +61,7 @@ class ScorePage extends StatelessWidget {
                     ),
                     Center(
                       child: ElevatedButton(
-                          onPressed: () => Get.offAll(() => const HomePage()), child: const Text('Home')),
+                          onPressed: () => Get.offAll(() => const HomePage(isFlashcardMode: false,)), child: const Text('Home')),
                     ),
                   ],
                 ),

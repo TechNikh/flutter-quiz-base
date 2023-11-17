@@ -13,6 +13,7 @@ dependencies:
   http:
   timer_count_down:
   get:
+  flip_card: ^0.7.0
 
 dev_dependencies:
   flutter_test:

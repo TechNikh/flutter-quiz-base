@@ -10,6 +10,7 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isFlashcardMode;
     return MyScaffold(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,10 +33,24 @@ class WelcomePage extends StatelessWidget {
                     style: TextStyle(fontSize: 30),
                   ),
                   GradientBtn(
-                    onTap: () => Get.offAll(() => const HomePage()),
+                    onTap: () {
+                      isFlashcardMode = false;
+                      Get.offAll(() => HomePage(isFlashcardMode: isFlashcardMode,));
+                      },
                     width: 250,
                     child: const Text(
                       'Let\'s Quiz!',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                  GradientBtn(
+                    onTap: () {
+                      isFlashcardMode = true;
+                      Get.offAll(() => HomePage(isFlashcardMode: isFlashcardMode,),);
+                      },
+                    width: 250,
+                    child: const Text(
+                      'Flash Mode',
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),

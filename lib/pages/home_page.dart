@@ -5,7 +5,9 @@ import 'package:quiz_app/widgets/gradient_btn.dart';
 import 'package:quiz_app/widgets/my_scaffold.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({required this.isFlashcardMode, super.key});
+
+  final bool isFlashcardMode;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,11 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
               GradientBtn(
-                  onTap: () => Get.to(() => const QuizPage()),
+                  onTap: () => Get.to(() => QuizPage(isFlashcardMode: isFlashcardMode,)),
                   child: const Text(
                     'PLAY QUIZ NOW',
                     style: TextStyle(color: Colors.white, fontSize: 25),
-                  ))
+                  ),),
             ],
           ),
         ),
